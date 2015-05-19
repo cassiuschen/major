@@ -1,0 +1,71 @@
+body.sessions, body.registrations {
+	.auth-area {
+		width: 300px !important;
+		margin: 0 auto;
+		padding-top: calc(50vh - 80px);
+		text-align: center;
+
+		* {
+			transition: all 0.28s;
+		}
+		.content {
+			background-color: rgba(210,210,210,0.5);
+			border-radius: $border-radius;
+			@extend %shadowInBlack;
+			padding-top: 25px;
+			color: #fafafa;
+
+			.header {
+				color: #aaa !important;
+				font-weight: bold;
+				margin-bottom: 25px;
+			}
+
+			form {
+				@include placeholderColor(#777);
+				input {
+					background-color: rgba(225,225,225,0.2);
+					width: 100%;
+					border: 0px solid rgba(0,0,0,0.1);
+					height: 35px;
+					line-height: 24px;
+					font-size: 18px;
+					border-top-width: 1px;
+					padding: 5px 12px;
+					color: #eee;
+					
+					&:first-child {
+						border-top-width: 0px;
+					}
+
+					&:active, &:focus {
+						background-color: rgba(255,255,255,0.4);
+						color: #777;
+					}
+				}
+
+				.submit {
+					border-radius: 0 0 $border-radius $border-radius;
+					opacity: 0.5;
+					&.green {
+						background-color: $green;
+					}
+
+					&:hover {
+						opacity: 0.8;
+					}
+
+					&:active {
+						opacity: 1;
+					}
+				}
+
+				.field {
+					padding: 0;
+					margin: 0;
+					@extend %shadowInBlack;
+				}
+			}
+		}
+	}	
+}

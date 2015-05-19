@@ -1,0 +1,9 @@
+.ui.message {
+	border-radius: 0;
+	text-align: center;
+	z-index: 10000;
+	@extend %shadowInBlack;
+	position: fixed;
+	width: 100%;
+	opacity: 0.7;
+}
