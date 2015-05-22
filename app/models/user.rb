@@ -33,7 +33,30 @@ class User < ActiveRecord::Base
   end
 
   def has_complete_info?
-    !!(self.sexal)
+    !!(self.sexal && self.avatar)
+  end
+
+  def major_info
+    m = Major.find self.major_id
+    c = College.find m.college_id
+    u = University.find c.university_id
+    "#{u.name} - #{c.name} - #{m.name}"
+  end
+
+  def avatar_img
+    if self.avatar
+      self.avatar.path 
+    else
+      "avatar/#{self.sexal}.jpg"
+    end
+  end
+
+  def article_count
+    if self.articles
+      self.articles.to_a.size
+    else
+      0
+    end
   end
   
 end

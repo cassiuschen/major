@@ -1,0 +1,88 @@
+main.has_menu
+  .ui.page.grid
+    .column#content
+      .ui.green.segment
+        h4.header.ui
+          i.info.icon
+          .content
+            | 等等！
+            .sub.header
+              | 为了方便考生查找自己心仪的专业，我们创造了多种检索方式，不过这需要你的帮助：我们需要你提供有关你专业的详细信息。
+      br
+      form.ui.form
+        // 大学单元
+        h4.ui.divider.horizontal.header
+          i.university.icon
+          | 我的大学信息
+        .field
+          label 大学名称
+          .ui.selection.dropdown#uni
+            input type="hidden"
+            .default.text 请选择大学
+            i.dropdown.icon
+            .menu#university
+              - University.all.each do |u|
+                .item data-value="#{u.id}" = u.name
+        .field
+          label
+            a.modal-target data-modal="createUni"
+              | 找不到自己的大学？
+
+        h4.ui.divider.horizontal.header
+          i.university.icon
+          | 我的学院信息
+        .field
+          label 学院名称
+          .ui.selection.dropdown.disabled
+            input type="hidden"
+            .default.text 请选择学院
+            i.dropdown.icon
+            .menu#colleges 
+        .field
+          label
+            a.modal-target data-modal="createCol"
+              | 找不到自己的学院？
+        h4.ui.divider.horizontal.header
+          i.university.icon
+          | 我的专业/系别
+        .field
+          label 专业名称
+          .ui.selection.dropdown.disabled
+            input type="hidden"
+            .default.text 请选择专业
+            i.dropdown.icon
+            .menu#majors
+
+- content_for :modals
+  = form_for [:stuff, University.new], html:{ class: 'ui modal signin form basic small', id: 'createUni'}, remote: true do |f|
+    i.close.icon
+    .header
+      | 创建大学
+    .content
+      .field
+        label 大学全称
+        = f.text_field :name, placeholder: "如：中国传媒大学"
+      .field
+        label 英文简写
+        = f.text_field :short_name, placeholder: "如：cuc"
+    .actions
+      a.ui.button.inverted.red.basic 取消
+      button.ui.button.labeled.basic.inverted.green.icon.submit
+        i.plus.icon
+        | 创建大学
+  = form_for [:stuff, University.new], html:{ class: 'ui modal signin form basic small', id: 'createCol'}, remote: true
+    i.close.icon
+    .header
+      | 创建学院
+    .content
+      .field
+        label 学院全称
+        input type="text" placeholder="如：动画与数字艺术学院"
+      .field
+        label 英文简写
+        input type="text" placeholder="如：anima"
+    .actions
+      a.ui.button.inverted.red.basic 取消
+      button.ui.button.labeled.basic.inverted.green.icon.submit
+        i.plus.icon
+        | 创建学院

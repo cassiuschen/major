@@ -1,0 +1,14 @@
+- segment_class = user.article_count > 3 ? 'tall stacked' : (user.article_count > 0 ? 'stacked' : '')
+.ui.segment.attached class="#{segment_class}"
+  - if user.article_count > 0
+    = render user.articles
+  - else
+    h2.ui.icon.header.center.aligned.clearfix
+      i.inbox.icon
+      .content
+        | 暂无文章
+        .sub.header
+          | 点击下方“分享就读体验”开始写作
+a.ui.button.attached.bottom.green
+  i.plus.icon
+  | 分享就读体验

@@ -1,3 +1,13 @@
-.ui.left.floated.secondary.menu
-  a.item
-    i.menu.icon
+= link_to stuff_dashboard_path, class: 'item'
+  i.dashboard.icon
+  | 主面板
+
+= link_to stuff_dashboard_path, class: 'item'
+  i.home.icon
+  | 主面板
+
+.right.menu
+  .item
+    = current_user.name
+  = link_to destroy_user_session_path, method: :delete, class: 'item'
+    | 退出登录

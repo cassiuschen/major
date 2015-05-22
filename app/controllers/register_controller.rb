@@ -9,6 +9,7 @@ class RegisterController < ApplicationController
       @user = User.new stuff_params
       @user.stuff!
       if @user.save
+        InviteToken.use params[:stuff]["token"]
         redirect_to root_path, success: "注册成功！"
         sign_in @user, :bypass => true
       else

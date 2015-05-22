@@ -36,15 +36,15 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
   body class="#{action_name} #{controller_name}"
-    nav.global.nav
-      .ui.page.grid
-        .column
-          - if current_user.stuff?
-            = render 'layouts/stuff_nav'
-          - if current_user.student?
-            = render 'layouts/student_nav'
+    
     = yield :modals
+    = semantic_flash
     .pusher
-      = semantic_flash
+      nav.global.nav.ui.secondary.menu
+        - if current_user.stuff?
+          = render 'layouts/stuff_nav'
+        - if current_user.student?
+          = render 'layouts/student_nav'
+      
       = yield
     = yield :script
