@@ -17,6 +17,7 @@
 #= require modernizr
 #= require semantic-ui
 #= require nprogress
+#= require components/dropdown
 #= require nprogress-turbolinks
 # require_tree .
 

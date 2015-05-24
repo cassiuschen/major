@@ -4,7 +4,13 @@
 	$('#uni>.menu.active').removeClass("active selected");
 	$('#uni>.menu').append("<div class=\"item active selected\" data-value=\"<%= @uni.id %>\"><%= @uni.name %></div>");
 	window.notification.init("大学创建成功！")
+	<% if @uni.colleges.any? %>
+		var data = <%= @uni.colleges %>;
+	<% else %>
+		var data = [];
+	<% end %>
+	var collection = new Dropdown('#colleges', data);
 <% else %>
-$('#createUni').modal("show");
+	$('#createUni').modal("show");
 	window.notification.init("信息填写不完整！", "warning");
 <% end -%>
