@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150526112247) do
   create_table "articles", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
+    t.string   "title"
     t.integer  "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -27,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150526112247) do
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "colleges", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",          null: false
     t.text     "desc"
     t.integer  "university_id"
     t.datetime "created_at",    null: false
@@ -74,7 +75,7 @@ ActiveRecord::Schema.define(version: 20150526112247) do
   end
 
   create_table "majors", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",          null: false
     t.text     "desc"
     t.string   "code"
     t.integer  "college_id"
@@ -87,7 +88,7 @@ ActiveRecord::Schema.define(version: 20150526112247) do
   add_index "majors", ["discipline_id"], name: "index_majors_on_discipline_id", using: :btree
 
   create_table "universities", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.string   "logo"
     t.text     "desc"
     t.datetime "created_at", null: false

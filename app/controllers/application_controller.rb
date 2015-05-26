@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :logging
-  after_action :store_location, only: [:index, :show]
+  #after_action :store_location, only: [:index, :show]
   before_action :configure_permitted_parameters, if: :devise_controller?
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -109,6 +109,16 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
+    if current_user.stuff?
+      stuff_dashboard_path
+    elsif current_user.student?
+      root_path
+    else
+      super
+    end
+  end
+
+  def after_sign_up_path_for(resource)
     if current_user.stuff?
       stuff_dashboard_path
     elsif current_user.student?

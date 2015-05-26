@@ -40,11 +40,13 @@ html
     = yield :modals
     = semantic_flash
     .pusher
-      nav.global.nav.ui.secondary.menu
-        - if current_user.stuff?
-          = render 'layouts/stuff_nav'
-        - if current_user.student?
-          = render 'layouts/student_nav'
-      
+      .ui.page.grid#dashboard_menu
+        .column
+          .ui.secondary.menu.pointing.big
+            - if current_user.stuff?
+              = render 'layouts/stuff_nav'
+            - if current_user.student?
+              = render 'layouts/student_nav'
+
       = yield
     = yield :script

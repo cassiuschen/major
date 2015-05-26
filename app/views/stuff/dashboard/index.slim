@@ -1,9 +1,9 @@
-main.has_menu
+main
   .ui.page.grid
-    .ten.wide.column
+    .twelve.wide.column
       = render 'stuff/share/notification'
       = render partial: 'stuff/share/user_articles', locals: {user: current_user}
-    .six.wide.column
+    .four.wide.column
       /= render 'stuff/share/user_card'
       = render partial: 'stuff/share/user_card', locals: {user: current_user}
 

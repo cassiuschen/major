@@ -15,6 +15,7 @@ class Stuff::UsersController < Stuff::BaseController
   def major
     @user.major_id = params[:major_id]
     if @user.validate_college_info!
+    #if @user.save
       @user.save
       redirect_to stuff_dashboard_path, flash: {success: '专业信息更新完毕！'}
     else

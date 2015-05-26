@@ -40,10 +40,14 @@ class User < ActiveRecord::Base
   end
 
   def major_info
-    m = Major.find self.major_id
-    c = College.find m.college_id
-    u = University.find c.university_id
-    "#{u.name} - #{c.name} - #{m.name}"
+    begin
+      m = Major.find self.major_id
+      c = College.find m.college_id
+      u = University.find c.university_id
+      "#{u.name} - #{c.name} - #{m.name}"
+    rescue
+      "暂无信息"
+    end
   end
 
   def avatar_img

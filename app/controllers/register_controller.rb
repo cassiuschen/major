@@ -7,16 +7,16 @@ class RegisterController < ApplicationController
   def stuff
     if InviteToken.can_use? params[:stuff]["token"]
       @user = User.new stuff_params
-      @user.stuff!
       if @user.save
+        @user.stuff!
         InviteToken.use params[:stuff]["token"]
         redirect_to root_path, success: "注册成功！"
         sign_in @user, :bypass => true
       else
-        respond_to root_path, flash: { error: "注册失败!"}
+        redirect_to root_path, flash: { error: "注册失败!"}
       end
     else
-      respond_to root_path, flash: { error: '邀请码使用次数已超过上限！'}
+      redirect_to root_path, flash: { error: '邀请码使用次数已超过上限！'}
     end
   end
 
