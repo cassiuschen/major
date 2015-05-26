@@ -1,15 +1,12 @@
+
+
 <%- if @flag == true %>
 	$('#uni>input').val(<%= @uni.id %>);
 	$('#uni>.text').html("<%= @uni.name %>");
 	$('#uni>.menu.active').removeClass("active selected");
 	$('#uni>.menu').append("<div class=\"item active selected\" data-value=\"<%= @uni.id %>\"><%= @uni.name %></div>");
+	$('form button.submit').removeClass('disabled');
 	window.notification.init("大学创建成功！")
-	<% if @uni.colleges.any? %>
-		var data = <%= @uni.colleges %>;
-	<% else %>
-		var data = [];
-	<% end %>
-	var collection = new Dropdown('#colleges', data);
 <% else %>
 	$('#createUni').modal("show");
 	window.notification.init("信息填写不完整！", "warning");

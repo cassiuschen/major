@@ -1,0 +1,1 @@
+json.array! @universities, :id, :name, :shorname

@@ -1,57 +1,58 @@
 main.has_menu
-  .ui.page.grid
+  .ui.grid.centered.two.column.page
     .column#content
-      .ui.green.segment
-        h4.header.ui
+      .ui.green.segment.inverted#message_for_regist
+        h4.header.ui.inverted
           i.info.icon
           .content
             | 等等！
             .sub.header
               | 为了方便考生查找自己心仪的专业，我们创造了多种检索方式，不过这需要你的帮助：我们需要你提供有关你专业的详细信息。
       br
-      form.ui.form
-        // 大学单元
-        h4.ui.divider.horizontal.header
-          i.university.icon
-          | 我的大学信息
-        .field
-          label 大学名称
-          .ui.selection.dropdown#uni
-            input type="hidden"
-            .default.text 请选择大学
-            i.dropdown.icon
-            .menu#university
-              - University.all.each do |u|
-                .item data-value="#{u.id}" = u.name
-        .field
-          label
-            a.modal-target data-modal="createUni"
-              | 找不到自己的大学？
+      .ui.ordered.steps.three#registStep
+        .step.active
+          .content
+            .title 大学信息
+            .description 选择或创建自己所在的大学
+        .step
+          .content
+            .title 院系信息
+            .description 选择或创建自己所在的院系
+        .step
+          .content
+            .title 专业信息
+            .description 选择或创建自己所在的专业
+      #registContent
+        = form_tag university_stuff_user_path(current_user), class: 'ui form', remote: true
+          // 大学单元
+          h4.ui.divider.horizontal.header
+            i.university.icon
+            | 我的大学信息
+          .field
+            label 大学名称
+            .ui.selection.dropdown#uni
+              input type="hidden" name="university_id"
+              .default.text 请选择大学
+              i.dropdown.icon
+              .menu#university
+                - University.all.each do |u|
+                  .item data-value="#{u.id}" = u.name
+          .field
+            label
+              a.modal-target data-modal="createUni"
+                | 找不到自己的大学?
+          .field
+            button.submit.ui.button.fluid.disabled 下一步
 
-        h4.ui.divider.horizontal.header
-          i.university.icon
-          | 我的学院信息
-        .field
-          label 学院名称
-          .ui.selection.dropdown.disabled#colleges_dd
-            input type="hidden"
-            .default.text 请选择学院
-            i.dropdown.icon
-            .menu#colleges 
-        .field
-          label
-            a.modal-target data-modal="createCol"
-              | 找不到自己的学院？
-        h4.ui.divider.horizontal.header
-          i.university.icon
-          | 我的专业/系别
-        .field
-          label 专业名称
-          .ui.selection.dropdown.disabled
-            input type="hidden"
-            .default.text 请选择专业
-            i.dropdown.icon
-            .menu#majors
+        /= j render partial: 'stuff/dashboard/set_college_form', locals: {colleges: College.all}
+- content_for :script
+  coffee:
+    $(document).on 'page:change', ->
+      $('#uni').dropdown
+        onChange: (value, text, $choice) ->
+          console.log value
+          if !!(value)
+            $('form button.submit').removeClass 'disabled'
 
 - content_for :modals
   = form_for [:stuff, University.new], html:{ class: 'ui modal signin form basic small', id: 'createUni'}, remote: true do |f|
@@ -70,19 +71,4 @@ main.has_menu
       button.ui.button.labeled.basic.inverted.green.icon.submit
         i.plus.icon
         | 创建大学
-  = form_for [:stuff, University.new], html:{ class: 'ui modal signin form basic small', id: 'createCol'}, remote: true
-    i.close.icon
-    .header
-      | 创建学院
-    .content
-      .field
-        label 学院全称
-        input type="text" placeholder="如：动画与数字艺术学院"
-      .field
-        label 英文简写
-        input type="text" placeholder="如：anima"
-    .actions
-      a.ui.button.inverted.red.basic 取消
-      button.ui.button.labeled.basic.inverted.green.icon.submit
-        i.plus.icon
-        | 创建学院
+  

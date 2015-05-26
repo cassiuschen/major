@@ -1,0 +1,43 @@
+= form_tag college_stuff_user_path(current_user), class: 'ui form', remote: true
+  h4.ui.divider.horizontal.header
+    i.university.icon
+    | 我的学院信息
+  .field
+    label 学院名称
+    - @flag = colleges.any?
+    .ui.selection.dropdown#col_dp class="#{@flag ? '' : 'disabled'}"
+      input type="hidden"
+      - if @flag
+        .default.text 请选择学院
+        i.dropdown.icon
+        .menu#cols
+          - colleges.each do |u|
+            .item data-value="#{u.id}" = u.name
+      - else
+        .default.text 暂无学院在此登记
+
+  .field
+    label
+      a.modal-target data-modal="createCol"
+        | 找不到自己的学院?
+  .field
+    button.submit.ui.button.fluid.disabled 下一步
+
+
+= form_for [:stuff, university.colleges.build], html:{ class: 'ui modal signin form basic small', id: 'createCol'}, remote: true do |f|
+    i.close.icon
+    .header
+      | 创建学院
+    .content
+      .field
+        label 学院全称
+        = f.text_field :name, placeholder: "如：动画与数字艺术学院"
+      .field
+        label 英文简写
+        = f.text_field :short_name, placeholder: "如：anima"
+      = f.hidden_field :university_id, value: university.id
+    .actions
+      a.ui.button.inverted.red.basic 取消
+      button.ui.button.labeled.basic.inverted.green.icon.submit
+        i.plus.icon
+        | 创建学院

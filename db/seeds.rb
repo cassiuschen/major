@@ -5,6 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Discipline.delete_all
+
+@disciplines = IO.readlines './db/discipline.txt'
+@disciplines.each do |d|
+	data = d.split('|')
+	discipline = Discipline.create(name: data.last.gsub("\n", ''), code: data.first)
+end
 
 if Rails.env.development?
 

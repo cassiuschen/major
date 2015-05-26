@@ -18,6 +18,7 @@
 #= require semantic-ui
 #= require nprogress
 #= require components/dropdown
+#= require components/step
 #= require nprogress-turbolinks
 # require_tree .
 
@@ -54,6 +55,8 @@ window.base =
 		window.base.canCloseMessages()
 		window.base.initAccordions()
 
+window.major = 
+	onUniversitySet : ->
 
 $(document).on 'page:change', ->
   console.log 'init'

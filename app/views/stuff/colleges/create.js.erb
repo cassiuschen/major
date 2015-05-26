@@ -1,0 +1,11 @@
+<%- if @flag == true %>
+	$('#col_dp>input').val(<%= @college.id %>);
+	$('#col_dp>.text').html("<%= @college.name %>");
+	$('#col_dp>.menu.active').removeClass("active selected");
+	$('#col_dp>.menu').append("<div class=\"item active selected\" data-value=\"<%= @college.id %>\"><%= @college.name %></div>");
+	$('form button.submit').removeClass('disabled');
+	window.notification.init("学院创建成功！")
+<% else %>
+	$('#createCol').modal("show");
+	window.notification.init("信息填写不完整！", "warning");
+<% end -%>

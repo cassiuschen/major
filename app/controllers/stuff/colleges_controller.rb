@@ -6,7 +6,12 @@ class Stuff::CollegesController < Stuff::BaseController
 
   def create
     @college = College.create(college_params)
-    @feed = FeedBack.create(sender: 'system', content: "用户创建学院：#{@college.name}")
+    @flag = true
+    if @college.save
+      @feed = FeedBack.create(sender: 'system', content: "用户创建学院：#{@college.name}")
+    else
+      @flag = false
+    end
   end
 
   private
@@ -15,6 +20,6 @@ class Stuff::CollegesController < Stuff::BaseController
   end
 
   def college_params
-    params.require(:college).permit(:name, :short_name)
+    params.require(:college).permit(:name, :short_name, :university_id)
   end
 end

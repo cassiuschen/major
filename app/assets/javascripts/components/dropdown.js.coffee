@@ -14,6 +14,10 @@ class Dropdown
 		if params.callback
 			params.callback.call()
 		return
+
+	getData: (url) ->
+		@__getDataFromUrl url
+		@__mountData @data
 		
 
 	__mountData : (data) ->
@@ -27,6 +31,17 @@ class Dropdown
 			@self.addClass 'disabled'
 			@text.html '暂无数据'
 		return
+
+	__getDataFromUrl : (url) ->
+		$.ajax
+			type: 'GET'
+			url: url
+			success: (data) ->
+				@data = data
+			error: (_, textStatus, error) ->
+				console.log error
+				window.notification.init("#{error}")
+
 
 
 

@@ -1,0 +1,46 @@
+= form_tag major_stuff_user_path(current_user), class: 'ui form', remote: true
+  h4.ui.divider.horizontal.header
+    i.university.icon
+    | 我的专业信息
+  .field
+    label 专业名称
+    - @flag = majors.any?
+    .ui.selection.dropdown#col_dp class="#{@flag ? '' : 'disabled'}"
+      input type="hidden"
+      - if @flag
+        .default.text 请选择专业
+        i.dropdown.icon
+        .menu#cols
+          - majors.each do |u|
+            .item data-value="#{u.id}" = u.name
+      - else
+        .default.text 暂无专业在此登记
+
+  .field
+    label
+      a.modal-target data-modal="createMajor"
+        | 找不到自己的专业?
+  .field
+    button.submit.ui.button.fluid.disabled 提交
+
+
+= form_for [:stuff, college.majors.build], html:{ class: 'ui modal signin form basic small', id: 'createMajor'}, remote: true do |f|
+    i.close.icon
+    .header
+      | 创建专业
+    .content
+      .field
+        label 专业全称
+        = f.text_field :name, placeholder: "如：动画与数字艺术学院"
+      .field
+        label 专业描述
+        = f.text_area :des, placeholder: "简单介绍一下自己的专业~"
+      .field
+        label 所属分类
+
+      = f.hidden_field :college_id, value: college.id
+    .actions
+      a.ui.button.inverted.red.basic 取消
+      button.ui.button.labeled.basic.inverted.green.icon.submit
+        i.plus.icon
+        | 创建学院

@@ -1,5 +1,6 @@
 class University < ActiveRecord::Base
   has_many :colleges
+  has_many :users
   validates :short_name, uniqueness: true, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "只能用英文字符"}
   validates :name, presence: true, uniqueness: true
 

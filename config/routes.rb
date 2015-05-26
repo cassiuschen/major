@@ -16,6 +16,14 @@ Rails.application.routes.draw do
     resources :articles, except: [:index]
     resources :universities, only: [:show, :create]
     resources :colleges, only: [:show, :create]
+
+    resources :users, only: [:update, :show] do
+      member do
+        post :university
+        post :major
+        post :college
+      end
+    end
   end
 
 

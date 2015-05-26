@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :major
+  belongs_to :college
+  belongs_to :university
+
   has_many :articles
   has_one :contact
 
@@ -15,7 +18,7 @@ class User < ActiveRecord::Base
   }
 
   enum sexal: {
-    unknown: 0,
+    unknown: 0, 
     male: 1,
     girl: 2
   }
@@ -57,6 +60,18 @@ class User < ActiveRecord::Base
     else
       0
     end
+  end
+
+  def validate_college_info!
+    university = University.where(id: self.university_id).first
+    college = College.where(id: self.college_id).first
+    major = Major.where(id: self.major_id).first
+
+    return (university.colleges.include? college) && (college.majors.include? major)
+  end
+
+  def university
+    University.where(id: self.university_id).first
   end
   
 end
