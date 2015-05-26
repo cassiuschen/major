@@ -12,6 +12,7 @@ class Stuff::DashboardController < Stuff::BaseController
 
   private
   def has_major_info?
+    puts current_user.has_major_info?
     redirect_to stuff_set_major_path unless current_user.has_major_info?
   end
 end

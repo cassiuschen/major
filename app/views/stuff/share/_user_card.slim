@@ -11,6 +11,9 @@
       - if user.has_major_info?
         span.date = user.major_info
   .extra.content
-    i.icon class="#{user.sexal}"
+    /i.icon class="#{user.sexal}"
     a.aligned.right
       | 修改资料
+    |  / 
+    = link_to stuff_set_major_path
+      | 修改专业信息

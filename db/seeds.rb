@@ -10,7 +10,7 @@ Discipline.delete_all
 @disciplines = IO.readlines './db/discipline.txt'
 @disciplines.each do |d|
 	data = d.split('|')
-	discipline = Discipline.create(name: data.last.gsub("\n", ''), code: data.first)
+	discipline = Discipline.create(name: data.last.gsub("\n", ''), code: data.first.rjust(6, '0'))
 end
 
 if Rails.env.development?

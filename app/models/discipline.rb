@@ -108,12 +108,24 @@ class Discipline < ActiveRecord::Base
     '1205' => '图书馆、情报与档案管理'
   }
 
+  scope :in_gd, -> (first_gd) {where("code like '#{first_gd}%'")}
+
   def category_code
     self.code.rjust(6,'0')
   end
 
+  def to_params
+    self.code
+  end
+
   def category
     Discipline::CATEGORY[self.code.rjust(6, '0')[0..1]]
+  end
+
+  def self.first_gd_in_category(code)
+    result = {}
+    Discipline::FIRST_GRADE.each {|k,v| result[k] = v if k[0..1] == code}
+    result
   end
 
   def first_grade_discipline

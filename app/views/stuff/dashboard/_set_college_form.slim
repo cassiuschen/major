@@ -6,7 +6,7 @@
     label 学院名称
     - @flag = colleges.any?
     .ui.selection.dropdown#col_dp class="#{@flag ? '' : 'disabled'}"
-      input type="hidden"
+      input type="hidden" name="college_id"
       - if @flag
         .default.text 请选择学院
         i.dropdown.icon

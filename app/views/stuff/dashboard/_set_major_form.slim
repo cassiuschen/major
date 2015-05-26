@@ -5,8 +5,8 @@
   .field
     label 专业名称
     - @flag = majors.any?
-    .ui.selection.dropdown#col_dp class="#{@flag ? '' : 'disabled'}"
-      input type="hidden"
+    .ui.selection.dropdown#major_dp class="#{@flag ? '' : 'disabled'}"
+      input type="hidden" name="major_id"
       - if @flag
         .default.text 请选择专业
         i.dropdown.icon
@@ -21,26 +21,43 @@
       a.modal-target data-modal="createMajor"
         | 找不到自己的专业?
   .field
-    button.submit.ui.button.fluid.disabled 提交
+    button.submit.ui.button.green.fluid.disabled 提交
 
 
-= form_for [:stuff, college.majors.build], html:{ class: 'ui modal signin form basic small', id: 'createMajor'}, remote: true do |f|
+= form_for [:stuff, college.majors.build], html:{ class: 'ui modal form', id: 'createMajor'}, remote: true do |f|
     i.close.icon
     .header
       | 创建专业
     .content
       .field
+        label 所属分类
+        .ui.dropdown#select_category
+          = f.hidden_field :discipline_id
+          .default.text 选择一个专业分类
+          i.dropdown.icon
+          .menu
+            - Discipline::CATEGORY.each do |ccode, category|
+              .item
+                i.dropdown.icon
+                = category
+                .menu
+                  - Discipline.first_gd_in_category(ccode).each do |fg_code, fg_name|
+                    .item
+                      i.dropdown.icon
+                      = fg_name
+                      .menu
+                        - Discipline.in_gd(fg_code).each do |m|
+                          .item data-value="#{m.id}" = m.name
+      .field
         label 专业全称
         = f.text_field :name, placeholder: "如：动画与数字艺术学院"
       .field
         label 专业描述
-        = f.text_area :des, placeholder: "简单介绍一下自己的专业~"
-      .field
-        label 所属分类
-
+        = f.text_area :desc, placeholder: "简单介绍一下自己的专业~"
+      
       = f.hidden_field :college_id, value: college.id
     .actions
-      a.ui.button.inverted.red.basic 取消
-      button.ui.button.labeled.basic.inverted.green.icon.submit
+      a.ui.button.red 取消
+      button.ui.button.labeled.green.icon.submit
         i.plus.icon
-        | 创建学院
+        | 创建专业

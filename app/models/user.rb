@@ -73,5 +73,13 @@ class User < ActiveRecord::Base
   def university
     University.where(id: self.university_id).first
   end
+
+  def college
+    College.where(id: self.college_id).first
+  end
+
+  def major
+    Major.where(id: self.major_id).first
+  end
   
 end

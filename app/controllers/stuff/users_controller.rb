@@ -9,13 +9,14 @@ class Stuff::UsersController < Stuff::BaseController
   def college
     @user.college_id = params[:college_id]
     @user.save
+    @college = @user.college
   end
 
   def major
     @user.major_id = params[:major_id]
     if @user.validate_college_info!
       @user.save
-      redirect_to stuff_dashboard_path
+      redirect_to stuff_dashboard_path, flash: {success: '专业信息更新完毕！'}
     else
       redirect_to stuff_set_major_path, flash: {error: '信息出错，请重新填写！'}
     end

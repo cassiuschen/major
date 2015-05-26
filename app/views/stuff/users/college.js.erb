@@ -2,6 +2,18 @@ var step = new Step({
 	selector: '#registStep',
 	container: '#registContent'
 });
-step.nextStep("<%= j render partial: 'stuff/dashboard/set_college_form', locals: {colleges: @uni.colleges, university: @uni}%>");
-$('#message_for_regist').fadeOut().remove();
+step.nextStep("<%= j render partial: 'stuff/dashboard/set_major_form', locals: {majors: @college.majors, college: @college}%>");
 base.init()
+
+$('#select_category').dropdown({
+	on: 'click',
+	allowCategorySelection: true
+});
+
+$('#major_dp').dropdown({
+  onChange: function(v,t,$el) {
+    if(!!(v)) {
+      $('form button.submit').removeClass('disabled');
+    }
+  }
+});

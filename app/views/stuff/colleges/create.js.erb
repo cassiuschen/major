@@ -1,5 +1,6 @@
 <%- if @flag == true %>
 	$('#col_dp>input').val(<%= @college.id %>);
+	$('#col_dp').removeClass('disabled');
 	$('#col_dp>.text').html("<%= @college.name %>");
 	$('#col_dp>.menu.active').removeClass("active selected");
 	$('#col_dp>.menu').append("<div class=\"item active selected\" data-value=\"<%= @college.id %>\"><%= @college.name %></div>");
