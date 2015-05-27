@@ -17,6 +17,9 @@
 #= require modernizr
 #= require semantic-ui
 #= require nprogress
+#= require components/dropdown
+#= require simditor
+#= require components/step
 #= require nprogress-turbolinks
 # require_tree .
 
@@ -25,6 +28,10 @@ NProgress.configure
   ease: 'ease',
   speed: 500
 
+window.notification =
+	init : (message, type = 'info') ->
+		$('body').append "<div class=\"ui #{type} message\"><i class=\"close icon\"></i>#{message}</div>"
+		window.base.canCloseMessages();
 
 window.base = 
 	checkModalButtons : ->
@@ -41,11 +48,16 @@ window.base =
 	canCloseMessages: ->
 		$('.message .close').on 'click', ->
 	  		$(this).closest('.message').fadeOut()
+	initAccordions : ->
+	 	$('.accordion').accordion()
 	init: ->
 		window.base.checkModalButtons()
 		window.base.initDropdown()
 		window.base.canCloseMessages()
+		window.base.initAccordions()
 
+window.major = 
+	onUniversitySet : ->
 
 $(document).on 'page:change', ->
   console.log 'init'

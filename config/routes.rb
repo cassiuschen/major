@@ -8,6 +8,32 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'about' => 'home#about'
 
+  namespace :stuff do
+    get '/' => 'dashboard#index', as: :dashboard
+    get 'major' => 'dashboard#set_university', as: :set_major
+    post 'major' => 'dashboard#update_major', as: :update_major
+
+    resources :articles, except: [:index]
+    resources :universities, only: [:show, :create]
+    resources :colleges, only: [:show, :create]
+    resources :majors, only: [:show, :create]
+
+    resources :users, only: [:update, :show] do
+      member do
+        post :university
+        post :major
+        post :college
+      end
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
+      post 'thumb' => 'uploader#thumb'
+    end
+  end
+
+
   devise_for :users, path: 'auth', skip: :registrations
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,7 +3,7 @@ html
   head
     title
       = yield :title
-      | 学长只能帮你到这了
+      = Settings.site.name
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, user-scalable=no"
@@ -36,15 +36,17 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
   body class="#{action_name} #{controller_name}"
-    nav.global.nav
-      .ui.page.grid
-        .column
-          - if current_user.stuff?
-            = render 'layouts/stuff_nav'
-          - if current_user.student?
-            = render 'layouts/student_nav'
+    
     = yield :modals
+    = semantic_flash
     .pusher
-      = semantic_flash
+      .ui.page.grid#dashboard_menu
+        .column
+          .ui.secondary.menu.pointing.big
+            - if current_user.stuff?
+              = render 'layouts/stuff_nav'
+            - if current_user.student?
+              = render 'layouts/student_nav'
+
       = yield
     = yield :script

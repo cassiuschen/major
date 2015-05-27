@@ -1,6 +1,6 @@
 class Major < ActiveRecord::Base
   belongs_to :college
-  belongs_to :second_grade_discipline
+  belongs_to :discipline
   has_many :users
 
   def category

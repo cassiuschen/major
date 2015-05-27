@@ -1,0 +1,46 @@
+body.articles.new {
+	background: #fff;
+	* {
+		transition: all 0.28s;
+	}
+	form {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	nav {
+		width: 95%;
+		margin: 0 auto;
+		padding-top: 15px;
+	}
+
+	.editor {
+		margin: 0;
+		margin-top: 15px;
+		padding: 0;
+
+		.simditor {
+			border: none !important;
+		}
+
+		input {
+			display: block;
+			width: 90%;
+			margin: 0 auto;
+			border: 0px solid #f7f7f7;
+			border-bottom-width: 2px;
+			font-size: 18px;
+			line-height: 24px;
+			height: 34px;
+			padding: 5px;
+			text-align: center;
+			margin-bottom: 10px;
+
+			&:hover, &:focus {
+				border-color: #eee;
+			}
+
+		}
+	}
+}

@@ -1,0 +1,7 @@
+body.set_university.dashboard {
+	#content {
+		@extend %shadowOnGray;
+		border-radius: $border-radius;
+		background-color: #fff;
+	}
+}

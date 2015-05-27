@@ -1,0 +1,13 @@
+.ui.segment.attached
+  - if user.article_count > 0
+    = render user.articles
+  - else
+    h2.ui.icon.header.center.aligned.clearfix
+      i.inbox.icon
+      .content
+        | 暂无文章
+        .sub.header
+          | 点击下方“分享就读体验”开始写作
+= link_to new_stuff_article_path, class: "ui button attached bottom #{user.article_count < 1 ? 'green' : ''}", 'data-no-turbolink' => true
+  i.plus.icon
+  | 分享就读体验

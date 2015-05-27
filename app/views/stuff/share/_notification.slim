@@ -1,0 +1,12 @@
+.ui.info.message
+	i.close.icon
+	.header 系统公告
+	== BillBoard.global
+- unless current_user.has_complete_info?
+  /.ui.warning.message
+    i.close.icon
+    .header
+      | 你的个人资料还可以补充哦~
+    | 为了方便他人得到更有效的信息，请
+    a 点击此处
+    | 完善个人信息。

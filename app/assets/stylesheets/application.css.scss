@@ -11,7 +11,11 @@
  * file per style scope.
  *
  * require_tree .
+ 
+ *= require simditor-font
+ *= require font-awesome
  *= require_self
+ *= require simditor
  */
 $border-radius: 15px;
 
@@ -19,6 +23,10 @@ $green: #2ecc40;
 
 %shadowInBlack {
   box-shadow: 0 0 3px #777;
+}
+
+%shadowOnGray {
+  box-shadow: 0 0 3px #eee;
 }
 
 @mixin placeholderColor($c) {
@@ -45,4 +53,42 @@ body.blank {
   background-position: 50% 50%;
   transform: translate3d(0, 0, 0);
   transition: background-color 3s ease-in-out 1s;
+}
+
+.has_menu {
+  padding-top: 70px;
+}
+
+.segment.ui {
+  border-radius: $border-radius !important;
+
+  &.attached {
+    border-radius: $border-radius $border-radius 0 0 !important;
+  }
+}
+
+.ui.card {
+  border-radius: $border-radius !important;
+  .image {
+    border-radius: $border-radius $border-radius 0 0 !important;
+    img {
+      border-radius: $border-radius $border-radius 0 0 !important;
+    }
+  }
+}
+
+.ui.button {
+  &.attached {
+    &.top {
+      border-radius: $border-radius $border-radius 0 0 !important;
+    }
+
+    &.bottom {
+      border-radius: 0 0 $border-radius $border-radius;
+    }
+  }
+}
+
+#dashboard_menu {
+  padding-top: 20px;
 }

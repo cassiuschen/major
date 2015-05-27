@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :logging
-  before_action :set_variant
-  after_action :store_location, only: [:index, :show]
+  #after_action :store_location, only: [:index, :show]
   before_action :configure_permitted_parameters, if: :devise_controller?
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -110,7 +109,23 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    session.delete(:previous_url) || root_path || super
+    if current_user.stuff?
+      stuff_dashboard_path
+    elsif current_user.student?
+      root_path
+    else
+      super
+    end
+  end
+
+  def after_sign_up_path_for(resource)
+    if current_user.stuff?
+      stuff_dashboard_path
+    elsif current_user.student?
+      root_path
+    else
+      super
+    end
   end
 
   def require_stuff
@@ -124,22 +139,12 @@ class ApplicationController < ActionController::Base
   private
 
   def logging
-    logger.info "Current user: #{user_signed_in? ? current_user.id : 'guest'}"
+    logger.info "Current user: #{user_signed_in? ? current_user.name : 'guest'}"
     logger.info "Session: #{session.to_hash}"
     logger.info "> IP #{request.ip} Who #{user_signed_in? ? current_user.id : 'guest'} By #{request.method} What #{request.fullpath} When #{Time.now} From #{request.env['action_dispatch.request.unsigned_session_cookie']['previous_url']}"
   end
 
   def trim_param_id
     params[:id] and params[:id].gsub! /[^\w]$/, ''
-  end
-
-  def set_variant
-    request.variant = if browser.tablet?
-                        :tablet
-                      elsif browser.mobile?
-                        :mobile
-                      else
-                        :desktop
-                      end
   end
 end

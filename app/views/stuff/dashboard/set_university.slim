@@ -1,0 +1,74 @@
+main
+  .ui.grid.centered.two.column.page style="padding-top: 15px;"
+    .column#content
+      .ui.green.segment.inverted#message_for_regist
+        h4.header.ui.inverted
+          i.info.icon
+          .content
+            | 等等！
+            .sub.header
+              | 为了方便考生查找自己心仪的专业，我们创造了多种检索方式，不过这需要你的帮助：我们需要你提供有关你专业的详细信息。
+      br
+      .ui.ordered.steps.three#registStep
+        .step.active
+          .content
+            .title 大学信息
+            .description 选择或创建自己所在的大学
+        .step
+          .content
+            .title 院系信息
+            .description 选择或创建自己所在的院系
+        .step
+          .content
+            .title 专业信息
+            .description 选择或创建自己所在的专业
+      #registContent
+        = form_tag university_stuff_user_path(current_user), class: 'ui form', remote: true
+          // 大学单元
+          h4.ui.divider.horizontal.header
+            i.university.icon
+            | 我的大学信息
+          .field
+            label 大学名称
+            .ui.selection.dropdown#uni
+              input type="hidden" name="university_id"
+              .default.text 请选择大学
+              i.dropdown.icon
+              .menu#university
+                - University.all.each do |u|
+                  .item data-value="#{u.id}" = u.name
+          .field
+            label
+              a.modal-target data-modal="createUni"
+                | 找不到自己的大学?
+          .field
+            button.submit.ui.button.fluid.disabled 下一步
+
+        /= j render partial: 'stuff/dashboard/set_college_form', locals: {colleges: College.all}
+- content_for :script
+  coffee:
+    $(document).on 'page:change', ->
+      $('#uni').dropdown
+        onChange: (value, text, $choice) ->
+          console.log value
+          if !!(value)
+            $('form button.submit').removeClass 'disabled'
+
+- content_for :modals
+  = form_for [:stuff, University.new], html:{ class: 'ui modal signin form basic small', id: 'createUni'}, remote: true do |f|
+    i.close.icon
+    .header
+      | 创建大学
+    .content
+      .field
+        label 大学全称
+        = f.text_field :name, placeholder: "如：中国传媒大学"
+      .field
+        label 英文简写
+        = f.text_field :short_name, placeholder: "如：cuc"
+    .actions
+      a.ui.button.inverted.red.basic 取消
+      button.ui.button.labeled.basic.inverted.green.icon.submit
+        i.plus.icon
+        | 创建大学
+  

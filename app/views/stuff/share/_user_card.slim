@@ -1,0 +1,19 @@
+.ui.card
+  .dimmable.image
+    .ui.dimmer
+      .content
+        .center
+          .ui.inverted.button 修改头像
+    = image_tag user.avatar_img
+  .content
+    a.header = user.name
+    .meta
+      - if user.has_major_info?
+        span.date = user.major_info
+  .extra.content
+    /i.icon class="#{user.sexal}"
+    a.aligned.right
+      | 修改资料
+    |  / 
+    = link_to stuff_set_major_path
+      | 修改专业信息

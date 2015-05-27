@@ -1,0 +1,12 @@
+<%- if @flag == true %>
+	$('#major_dp>input').val(<%= @major.id %>);
+	$('#major_dp').removeClass('disabled');
+	$('#major_dp>.text').html("<%= @major.name %>");
+	$('#major_dp>.menu.active').removeClass("active selected");
+	$('#major_dp>.menu').append("<div class=\"item active selected\" data-value=\"<%= @major.id %>\"><%= @major.name %></div>");
+	$('form button.submit').removeClass('disabled');
+	window.notification.init("专业创建成功！")
+<% else %>
+	$('#createMajor').modal("show");
+	window.notification.init("信息填写不完整！", "warning");
+<% end -%>

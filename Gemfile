@@ -43,10 +43,14 @@ gem 'rails_admin'
 gem 'font-awesome-rails'
 gem 'semantic-ui-sass'
 gem 'nprogress-rails'
+gem 'simditor-rails'
 
 gem 'auto-space'
 gem 'md_emoji'
 gem 'rails_autolink'
+gem 'auto-correct'
+
+gem 'settingslogic'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # Uploader
