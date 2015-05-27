@@ -22,7 +22,7 @@
             | 登录
 .ui.page.grid
   h1.ui.center.aligned.inverted.header#header
-    | 这里应该有一个产品标题
+    = Settings.site.name
     .text
       | 已有#{Article.all.size}人在此分享了就读经验
   - unless current_user

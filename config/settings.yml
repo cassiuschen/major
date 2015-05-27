@@ -1,4 +1,6 @@
 defaults: &defaults
+  site:
+    name: 学院志
 
 
 development:
