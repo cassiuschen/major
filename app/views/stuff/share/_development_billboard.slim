@@ -1,0 +1,16 @@
+.ui.card
+  .content
+    .header 版本说明
+    .meta
+      | 当前版本: 
+      = BillBoard.update.version
+    .desciption == BillBoard.update.content
+
+.ui.card 
+  .content
+    .header 未来更新
+    .meta
+      | 下一版本：#{BillBoard.future.version}
+      br
+      | 预计发布时间： #{BillBoard.future.date}
+    .desciption == BillBoard.future.content

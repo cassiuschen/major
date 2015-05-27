@@ -47,6 +47,9 @@ gem 'nprogress-rails'
 gem 'auto-space'
 gem 'md_emoji'
 gem 'rails_autolink'
+gem 'auto-correct'
+
+gem 'settingslogic'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # Uploader
