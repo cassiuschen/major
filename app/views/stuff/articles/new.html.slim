@@ -14,7 +14,13 @@ coffee:
   $ ->
     editor = new Simditor(
       textarea: $('.simditor')
-      upload: true
+      pasteImage: true
+      upload:
+        url: '/api/v1/thumb'
+        fileKey: 'article_thumb'
+        params: null
+        connectionCount: 1
+        leaveConfirm: '正在上传文件，如果离开上传会自动取消哦~'
       toolbarFloat: true
       tabIndent: true
       toolbar: ['bold', 'italic', 'underline', '|', 'ol', 'ul', 'blockquote', '|', 'link', 'image', '|', 'indent', 'outdent', '|', 'hr', 'table']

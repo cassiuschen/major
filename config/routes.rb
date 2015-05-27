@@ -27,6 +27,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      post 'thumb' => 'uploader#thumb'
+    end
+  end
+
 
   devise_for :users, path: 'auth', skip: :registrations
   # The priority is based upon order of creation: first created -> highest priority.
