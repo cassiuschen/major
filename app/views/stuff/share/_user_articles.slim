@@ -1,5 +1,4 @@
-- segment_class = user.article_count > 3 ? 'tall stacked' : (user.article_count > 0 ? 'stacked' : '')
-.ui.segment.attached class="#{segment_class}"
+.ui.segment.attached
   - if user.article_count > 0
     = render user.articles
   - else
@@ -9,6 +8,6 @@
         | 暂无文章
         .sub.header
           | 点击下方“分享就读体验”开始写作
-a.ui.button.attached.bottom.green
+= link_to new_stuff_article_path, class: "ui button attached bottom #{user.article_count < 1 ? 'green' : ''}", 'data-no-turbolink' => true
   i.plus.icon
   | 分享就读体验

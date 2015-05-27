@@ -11,6 +11,12 @@ class Stuff::ArticlesController < Stuff::BaseController
   end
 
   def create
+    @article = current_user.articles.build article_params
+    if @article.save
+      redirect_to stuff_dashboard_path, flash: {success: '文章发布成功！'}
+    else
+      render :new, flash: {error: '文章发布失败！'}
+    end
   end
 
   def update

@@ -1,11 +1,11 @@
 defaults: &defaults
   update:
-    version: 0.2.2 Alpha
-    content: + 用户可以设置自己的专业<br />+ 完善了通知系统
+    version: 0.3.2 Alpha
+    content: + 用户可以发布文章啦！<br />+ 用户可以设置自己的专业<br />+ 完善了通知系统
   future:
-    version: 0.3
-    date: 5月27日
-    content: + 用户可以编写文章
+    version: 0.4
+    date: 5月29日
+    content: + 用户可以更改个人资料<br / >+ 用户可以选择公布资料
   global: 目前系统仍在紧张开发，每天晚11：00将会进行系统升级，为避免数据丢失，请避开升级时间在本站进行操作。<br />开发期间Bug很多，如有问题，请致信 <a href="mailto:contact@cassiuschen.me">contact@cassiuschen.me</a> 或微信 cassius-chen。
 
 development:
