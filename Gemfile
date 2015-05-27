@@ -43,6 +43,7 @@ gem 'rails_admin'
 gem 'font-awesome-rails'
 gem 'semantic-ui-sass'
 gem 'nprogress-rails'
+gem 'simditor-rails'
 
 gem 'auto-space'
 gem 'md_emoji'

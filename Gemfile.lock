@@ -250,6 +250,7 @@ GEM
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
+    simditor-rails (1.0.5)
     slim (3.0.3)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -326,6 +327,7 @@ DEPENDENCIES
   semantic-ui-sass
   settingslogic
   sidekiq
+  simditor-rails
   slim-rails
   spring
   therubyracer

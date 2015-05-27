@@ -18,6 +18,7 @@
 #= require semantic-ui
 #= require nprogress
 #= require components/dropdown
+#= require simditor
 #= require components/step
 #= require nprogress-turbolinks
 # require_tree .

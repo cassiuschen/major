@@ -1,7 +1,5 @@
 class Stuff::ArticlesController < Stuff::BaseController
-  def index
-  end
-
+  before_action :set_article, except: [:new, :create]
   def show
   end
 
@@ -9,6 +7,7 @@ class Stuff::ArticlesController < Stuff::BaseController
   end
 
   def new
+    render layout: 'layouts/new_article'
   end
 
   def create
@@ -18,5 +17,15 @@ class Stuff::ArticlesController < Stuff::BaseController
   end
 
   def destroy
+  end
+
+  private
+  def set_article
+    @article = Article.where(id: params[:id]).first
+    raise ArgumentError unless @article
+  end
+
+  def article_params
+    params.require(:article).permit(:user_id, :content, :title)
   end
 end
