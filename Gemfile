@@ -41,7 +41,7 @@ gem 'sidekiq'
 gem 'rails_admin'
 
 gem 'font-awesome-rails'
-gem 'semantic-ui-sass'
+gem 'semantic-ui-sass', github: 'cassiuschen/semantic-ui-sass'
 gem 'nprogress-rails'
 gem 'simditor-rails'
 
