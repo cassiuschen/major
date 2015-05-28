@@ -34,5 +34,23 @@ module MajorSelector
     config.action_view.sanitized_allowed_attributes += %w(target data-knewone-embed-type data-knewone-embed-key data-knewone-embed-options data-knewone-embed-id contenteditable data-score data-profile-popover data-original)
 
     config.active_support.escape_html_entities_in_json = true
+
+    # Active Job Step
+    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_name_prefix = Rails.env
+
+    # Mailer
+    config.action_mailer.delivery_method = :sendmail
+    config.action_mailer.sendmail_settings = {  
+        :location       => '/usr/sbin/sendmail',  
+        :arguments      => '-i -t'  
+    }
+    config.consider_all_requests_local = true
+
+    # mailer previews
+    config.action_mailer.show_previews = true
+    config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
   end
 end
+
+require 'string'

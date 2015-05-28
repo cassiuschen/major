@@ -1,6 +1,7 @@
 .ui.segment.attached
   - if user.article_count > 0
-    = render user.articles
+    .ui.divided.items
+      = render user.articles
   - else
     h2.ui.icon.header.center.aligned.clearfix
       i.inbox.icon

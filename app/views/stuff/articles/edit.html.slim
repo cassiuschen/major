@@ -1,0 +1,27 @@
+= form_for [:stuff, @article] do |f|
+  nav
+    .ui.secondary.menu
+      = link_to stuff_dashboard_path, class: 'item', 'data-no-turbolink' => true
+        | 返回主页面
+      .right.menu
+        = link_to '取消', stuff_dashboard_path, class: 'item', 'data-no-turbolink' => true
+        = f.submit '保存', class: 'item ui button basic green', 'data-no-turbolink' => true
+  .editor
+    = f.text_field :title, class: 'ui', placeholder: '在此输入标题'
+    = f.text_area :content, class: 'simditor'
+
+coffee:
+  $ ->
+    editor = new Simditor(
+      textarea: $('.simditor')
+      pasteImage: true
+      upload:
+        url: '/api/v1/thumb'
+        fileKey: 'article_thumb'
+        params: null
+        connectionCount: 1
+        leaveConfirm: '正在上传文件，如果离开上传会自动取消哦~'
+      toolbarFloat: true
+      tabIndent: true
+      toolbar: ['bold', 'italic', 'underline', '|', 'ol', 'ul', 'blockquote', '|', 'link', 'image', '|', 'indent', 'outdent', '|', 'hr', 'table']
+    )

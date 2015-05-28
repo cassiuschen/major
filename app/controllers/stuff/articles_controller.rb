@@ -4,6 +4,7 @@ class Stuff::ArticlesController < Stuff::BaseController
   end
 
   def edit
+    render layout: 'layouts/new_article'
   end
 
   def new
@@ -20,9 +21,17 @@ class Stuff::ArticlesController < Stuff::BaseController
   end
 
   def update
+    @article.update article_params
+    if @article.save
+      redirect_to stuff_dashboard_path, flash: {success: '文章更新成功！'}
+    else
+      render :edit, flash: {error: '文章更新失败！'}
+    end
   end
 
   def destroy
+    @article.delete
+    redirect_to stuff_dashboard_path, flash: {success: '文章删除成功！'}
   end
 
   private

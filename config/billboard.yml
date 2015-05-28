@@ -1,7 +1,7 @@
 defaults: &defaults
   update:
-    version: 0.3.2 Alpha
-    content: + 用户可以发布文章啦！<br />+ 用户可以设置自己的专业<br />+ 完善了通知系统
+    version: 0.3.3 Alpha
+    content: + 用户可以更新、删除文章<br />+ 用户可以发布文章啦！<br />+ 用户可以设置自己的专业<br />+ 完善了通知系统
   future:
     version: 0.4
     date: 5月29日

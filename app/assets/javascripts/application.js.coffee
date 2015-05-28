@@ -19,6 +19,9 @@
 #= require nprogress
 #= require components/dropdown
 #= require simditor
+#= require rails-timeago
+#= require locales/jquery.timeago.zh-CN.js
+#= require rails-timeago-all
 #= require components/step
 #= require nprogress-turbolinks
 # require_tree .
