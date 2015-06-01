@@ -6,6 +6,8 @@
     .description
       p = article.preview
     .extra
+      = link_to stuff_article_path(article), class: 'ui button', remote: true
+        | 查看文章
       = link_to edit_stuff_article_path(article), class: 'ui right floated button circular icon'
         i.write.icon
       = link_to stuff_article_path(article), method: :delete, class: 'ui right floated button circular icon'

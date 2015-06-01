@@ -1,0 +1,10 @@
+.ui.modal.scrolling#articleModal
+  i.close.icon
+  .header 文章预览
+  .content
+    .description
+      h2.header.aligned.center = @article.title
+      == @article.content
+  .actions
+    a.ui.button
+      | 关闭

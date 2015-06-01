@@ -6,6 +6,10 @@
 	position: fixed;
 	width: 100%;
 	opacity: 0.7;
+
+	&.fix_in_page {
+		z-index: 1 !important;
+	}
 }
 
 body>.ui.message {
